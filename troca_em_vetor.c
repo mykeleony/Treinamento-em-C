@@ -18,5 +18,4 @@ int main() {
 		printf("N[%d] = %d\n", i, vetor[i]); //Imprimindo os resultados na ordem crescente de posição vetorial.
 
 	return 0;
-
 }
