@@ -32,24 +32,33 @@ void imprimeVetor(int *vetor, int tamanhoVetor) {
 
 //Ordenando os numeros de um vetor por Insertion Sort:
 int *ordenaVetorPorInsercao(int *numeros, int tamanhoArray, int primeiroDesordenado) {
-	if (primeiroDesordenado >= tamanhoArray)
-    return numeros;     // Condição de encerramento da recursividade: o array está ordenado (o último elemento é o fora de ordem).
+  // A função de complexidade T(n) se dá pelas constantes de tempo utilizada pelo algoritmo em cada comando.
 
-	int key = numeros[primeiroDesordenado];
+	if (primeiroDesordenado >= tamanhoArray)         //c37
+    return numeros;            // Condição de encerramento da recursividade: o array está ordenado (o último elemento é o fora de ordem). //c38
 
-	int i = primeiroDesordenado-1;
+	int key = numeros[primeiroDesordenado];          //c40
 
-	while ((i>=0) && (numeros[i]>key)) {
-		numeros[i+1] = numeros[i];
-		i--;
+	int i = primeiroDesordenado-1;                   //c42
+
+	while ((i>=0) && (numeros[i]>key)) {             //c44*t{primeiroDesordenado}
+		numeros[i+1] = numeros[i];               //c45*t {primeiroDesordenado}-1
+		i--;                                     //c46*t {primeiroDesordenado}-1
 	}
 
-	numeros[i+1]=key;
+	numeros[i+1]=key;                                //c49
 
-  ordenaVetorPorInsercao (numeros, tamanhoArray, primeiroDesordenado+1);
+  ordenaVetorPorInsercao (numeros, tamanhoArray, primeiroDesordenado+1);  //T(n-1)
 
-  return numeros;
+  return numeros;                                  	 //c54
 }
+
+/*
+Função de complexidade de tempo (fórmula de recorrência):
+T(n) = c37 + c40 + c42 + c44*t{primeiroDesordenado} + c45*t{primeiroDesordenado}-1 + c46*t{primeiroDesordenado}-1 + c49 + T(n-1) + c54
+
+
+*/
 
 int main () {
   // Testagem de exemplos:
