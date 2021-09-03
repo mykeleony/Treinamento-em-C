@@ -42,21 +42,31 @@ int *ordenaVetorPorInsercao(int *numeros, int tamanhoArray, int primeiroDesorden
 	int i = primeiroDesordenado-1;                   //c42
 
 	while ((i>=0) && (numeros[i]>key)) {             //c44*t{primeiroDesordenado}
-		numeros[i+1] = numeros[i];               //c45*t {primeiroDesordenado}-1
-		i--;                                     //c46*t {primeiroDesordenado}-1
+		numeros[i+1] = numeros[i];                     //c45*t {primeiroDesordenado}-1
+		i--;                                           //c46*t {primeiroDesordenado}-1
 	}
 
 	numeros[i+1]=key;                                //c49
 
   ordenaVetorPorInsercao (numeros, tamanhoArray, primeiroDesordenado+1);  //T(n-1)
 
-  return numeros;                                  	 //c54
+  return numeros;                                  //c54
 }
 
 /*
 Função de complexidade de tempo (fórmula de recorrência):
 T(n) = c37 + c40 + c42 + c44*t{primeiroDesordenado} + c45*t{primeiroDesordenado}-1 + c46*t{primeiroDesordenado}-1 + c49 + T(n-1) + c54
 
+Complexidade de tempo no melhor caso (array a ser ordenado já está completamente ordenado):
+
+T1(n) = c37 + c40 + c42 + c44*1 + c45*0 + c46*0 + c49 + T1(n-1) + c54
+T1(n) = c37 + c40 + c42 + c44 + c49 + T(n-1) + c54
+T1(n) = T1(n-1) + (c37 + c40 + c42 + c44 + c49 + c54); c = (c37 + c40 + c42 + c44 + c49 + c54)
+T1(n) = T1(n-1) + c
+
+A incógnita c equivale, aproximadamente, à complexidade de tempo da solução trivial (array de tamanho 1):
+T1(n) = T1(n-1)+T(1)
+T1(n) = \sum_{j=1}^{n} c = n*c
 
 */
 
