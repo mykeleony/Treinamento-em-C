@@ -1,3 +1,8 @@
+/* Programa que realiza operações elementares em listas lineares sequenciais.
+   13 de setembro de 2021.
+   Myke Leony dos Santos Amorim - Bacharelado em Sistemas de Informação - EACH USP.
+*/ 
+
 #include <stdio.h>
 
 // Tamanho máximo do valor estatico:
@@ -13,27 +18,27 @@ typedef struct {
 
 // Implementação de listas lineares sequenciais estáticas:
 typedef struct {
-	REGISTRO A[MAX];
+	REGISTRO elementos[MAX];
 	int nroElem;     // Número de elementos da lista naquele determinado instante.
 } LISTA;
 
 // Estabelece o número de elementos inicial da lista (0):
-void inicializarListaVazia (LISTA* l) {   // O ponteiro é utilizado para a lista copiada (por ser passagem por valor) não ser destruída ao término da função.
-  l->nroElem = 0;
+void inicializarListaVazia (LISTA* lista) {   // O ponteiro é utilizado para a lista copiada (por ser passagem por valor) não ser destruída ao término da função.
+  lista->nroElem = 0;
 }
 
 // Fornece o número de elementos de uma dada lista linear sequencial:
-int tamanhoLista(LISTA l) {
-  return l.nroElem;
+int tamanhoLista(LISTA lista) {
+  return lista.nroElem;
 }
 
 // Imprime cada elemento de uma dada lista:
-void imprimeLista(LISTA l) {
-  if(l.nroElem <= 0)
+void imprimeLista(LISTA lista) {
+  if(lista.nroElem <= 0)
     printf("Lista vazia.\n");
 
-  for(int i = 0; i < l.nroElem; i++) {
-    printf("%d, ", l.A[i].chave);
+  for(int i = 0; i < lista.nroElem; i++) {
+    printf("%d, ", lista.elementos[i].chave);
   }
 }
 
