@@ -108,6 +108,65 @@ int buscaSequencial(TIPOCHAVE chave, LISTA lista) {
     return VALOR_INVALIDO;
 }
 
+// Retorna a posição da lista sequencial em que se encontra uma chava por meio de uma busca com sentinela (vetor criado com MAX+1 posições):
+int buscaSentinela(TIPOCHAVE chave, LISTA lista) {
+  int i = 0;
+
+  lista.elementos[lista.nroElem].chave = chave;     // Definindo a sentinela
+
+  while (lista.elementos[i].chave != chave)
+    i++;
+
+  /* No laço, é feita apenas uma comparação, o que reduz, portanto, o valor do pior caso da complexidade de tempo desta função.
+     Na busca sequencial anterior, são feitas duas comparações no laço. Logo, o uso da sentinela torna o programa mais eficiente. */
+
+  if(i > lista.nroElem-1)
+    return VALOR_INVALIDO;    // Não encontrou a chave especificada.
+
+  else
+    return i;
+}
+
+// Retorna a posição da lista sequencial ordenada em que se encontra uma chava por meio de uma busca com sentinela (vetor criado com MAX+1 posições):
+int buscaSentinelaOrdenada(TIPOCHAVE chave, LISTA lista) {
+  int i = 0;
+
+  lista.elementos[lista.nroElem].chave = chave;     // Definindo a sentinela
+
+  while (lista.elementos[i].chave < chave)
+    i++;
+
+  if(i > lista.nroElem-1 || lista.elementos[i].chave != chave)
+    return VALOR_INVALIDO;    // Não encontrou a chave especificada.
+
+  else
+    return i;
+}
+
+/* Retorna a posição da lista sequencial ordenada em que se encontra uma chava por meio de uma busca binária:
+   Desta vez, a complexidade é log2 n, gerando um ganho significativo de eficiência. */
+
+int buscaBinariaOrdenada(TIPOCHAVE chave, LISTA lista) {
+  int infimo = 0, supremo = lista.nroElem-1, meio;
+
+  while (infimo <= supremo) {
+    meio = (infimo+supremo)/2;
+
+    if(lista.elementos[meio].chave == chave)
+      return meio;  // O elemento foi encontrado.
+
+    else {
+      if(lista.elementos[meio].chave < chave)
+        infimo = meio+1;
+
+      else
+        supremo = meio-1;
+    }
+  }
+
+  return -1;
+}
+
 // Exclui determinado elemento da lista sequencial:
 bool excluirElementoLista(TIPOCHAVE chave, LISTA* lista) {
   int posicao = buscaSequencial(chave, *lista);
@@ -144,6 +203,8 @@ int main() {
   imprimeLista(listaExemplo);
 
   printf("A posição do número 2 na lista é %d.\n", buscaSequencial(2, listaExemplo));
+
+  printf("A posição do número 2 na lista é %d.\n", buscaSentinela(2, listaExemplo));
 
   printf("Primeiro elemento da lista: %d\n", primeiroElementoLista(listaExemplo));
 
