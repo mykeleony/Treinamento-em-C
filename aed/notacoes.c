@@ -13,3 +13,9 @@ typedef struct {
 	TIPOCHAVE chave;
 	// Futuros novos campos...
 } REGISTRO
+
+// Implementação de listas lineares sequenciais estáticas:
+typedef struct {
+	REGISTRO A[MAX];
+	int nroElem;     // Número de elementos da lista naquele determinado instante.
+} LISTA
