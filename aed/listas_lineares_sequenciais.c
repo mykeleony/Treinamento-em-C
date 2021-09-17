@@ -1,7 +1,7 @@
 /* Programa que realiza operações elementares em listas lineares sequenciais.
    13 de setembro de 2021.
    Myke Leony dos Santos Amorim - Bacharelado em Sistemas de Informação - EACH USP.
-*/ 
+*/
 
 #include <stdio.h>
 
@@ -27,6 +27,10 @@ void inicializarListaVazia (LISTA* lista) {   // O ponteiro é utilizado para a 
   lista->nroElem = 0;
 }
 
+void inicializarLista (int tamanho, LISTA* lista) {
+  lista->nroElem = tamanho;
+}
+
 // Fornece o número de elementos de uma dada lista linear sequencial:
 int tamanhoLista(LISTA lista) {
   return lista.nroElem;
@@ -40,18 +44,51 @@ void imprimeLista(LISTA lista) {
   for(int i = 0; i < lista.nroElem; i++) {
     printf("%d, ", lista.elementos[i].chave);
   }
+
+  printf("\n");
+}
+
+// Fornece o primeiro elemento de uma dada lista:
+int primeiroElementoLista(LISTA lista) {
+  return lista.elementos[0].chave;
+}
+
+// Fornece o último elemento de uma dada lista:
+int ultimoElementoLista(LISTA lista) {
+  int indice_ultimo_elemento = (lista.nroElem)-1;
+
+  return lista.elementos[indice_ultimo_elemento].chave;
+}
+
+// Fornece o n-ésimo elemento de uma dada lista:
+int qualquerElementoLista(int n, LISTA lista) {
+  return lista.elementos[n-1].chave;
+}
+
+// Destrói uma lista. Como a alocação utilizada para os elementos é estática, basta definir o número de elementos como zero.
+// OBS: No caso de alocação dinâmica, basta utilizar a função free().
+void destroiLista(LISTA* lista) {
+  lista->nroElem = 0;
 }
 
 int main() {
-  // Testando a função de inicialização da lista linear sequencial:
+  // Testando as funções:
   LISTA listaExemplo;
-  inicializarListaVazia(&listaExemplo);
+  inicializarLista(10, &listaExemplo);
 
-  // Testando a função de tamanho da lista linear sequencial:
   printf("Tamanho da lista: %d\n", tamanhoLista(listaExemplo));
 
-  // Testando a função de impressão de elementos da lista linear sequencial:
   imprimeLista(listaExemplo);
 
+  printf("Primeiro elemento da lista: %d\n", primeiroElementoLista(listaExemplo));
+
+  printf("Ultimo elemento da lista: %d\n", ultimoElementoLista(listaExemplo));
+
+  printf("%do elemento da lista: %d\n", 4, qualquerElementoLista(4, listaExemplo));
+
+  destroiLista(&listaExemplo);
+
+  imprimeLista(listaExemplo);
+	
   return 0;
 }
