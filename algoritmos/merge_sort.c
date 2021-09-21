@@ -65,7 +65,6 @@ void intercala(int *A, int p, int q, int r) {
       j++;
     }
   }
-  
   free(L);
   free(R);
 }
@@ -79,6 +78,11 @@ void ordenaPorIntercalacao(int* A, int p, int r) {
   }
 }
 
+/* Função de complexidade de tempo genérica da função ordenaPorIntercalacaco (merge-sort):
+  T(n) = c73 + cc74 + T(n/2) + T(n/2) + I(n), com I(n) sendo a equação de complexidade de tempo do método intercala (merge).
+  T(n) = 2*T(n/2) + I(n)
+*/
+
 int main() {
   // Testagem de exemplos:
   int *exemplo = criaVetor(TAMANHO);
@@ -88,7 +92,7 @@ int main() {
   ordenaPorIntercalacao(exemplo, 0, TAMANHO);
 
   imprimeVetor(exemplo, TAMANHO);
-  
+
   free(exemplo);
 
   return 0;
