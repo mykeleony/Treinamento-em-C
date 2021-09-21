@@ -42,8 +42,8 @@ int *ordenaVetorPorInsercao(int *numeros, int tamanhoArray, int primeiroDesorden
 	int i = primeiroDesordenado-1;                   //c42
 
 	while ((i>=0) && (numeros[i]>key)) {             //c44*t{primeiroDesordenado}
-		numeros[i+1] = numeros[i];                     //c45*t {primeiroDesordenado}-1
-		i--;                                           //c46*t {primeiroDesordenado}-1
+		numeros[i+1] = numeros[i];                     //c45*t{primeiroDesordenado}-1
+		i--;                                           //c46*t{primeiroDesordenado}-1
 	}
 
 	numeros[i+1]=key;                                //c49
@@ -59,15 +59,40 @@ T(n) = c37 + c40 + c42 + c44*t{primeiroDesordenado} + c45*t{primeiroDesordenado}
 
 Complexidade de tempo no melhor caso (array a ser ordenado já está completamente ordenado):
 
-T1(n) = c37 + c40 + c42 + c44*1 + c45*0 + c46*0 + c49 + T1(n-1) + c54
-T1(n) = c37 + c40 + c42 + c44 + c49 + T(n-1) + c54
-T1(n) = T1(n-1) + (c37 + c40 + c42 + c44 + c49 + c54); c = (c37 + c40 + c42 + c44 + c49 + c54)
+T1(n) = c37 + c38 + c40 + c42 + c44*1 + c45*0 + c46*0 + c49 + T1(n-1) + c54
+T1(n) = c37 + c38 + c40 + c42 + c44 + c49 + T(n-1) + c54
+T1(n) = T1(n-1) + (c37 + c38 + c40 + c42 + c44 + c49 + c54); c = (c37 + c38 + c40 + c42 + c44 + c49 + c54)
 T1(n) = T1(n-1) + c
 
 A incógnita c equivale, aproximadamente, à complexidade de tempo da solução trivial (array de tamanho 1):
 T1(n) = T1(n-1)+T(1)
 T1(n) = \sum_{j=1}^{n} c = n*c
 
+Complexidade de tempo no pior caso:
+T(n) = c37 + c38 + c40 + c42 + c44*(n-1) + c45*(n-2) + c46*(n-2) + c49 + T(n-1) + c54
+T(n) = T(n-1) + c44*(n-1) + c45*(n-2) + c46*(n-2) + c38 + c40 + c42 + c49 + c54
+
+c1*n = c44*(n-1) + c45*(n-2) + c46*(n-2)
+c2 = c38 + c40 + c42 + c49 + c54
+
+T(n) = T(n-1) + c1*n + c2
+T(n) = T(n-1) + [c1*n + c2]
+
+Assumindo c1 = c2 = c:
+
+T(n) = T(n-1) + [c*n + c]
+
+Como T(1) = c:
+
+T(1) = c
+T(2) = c + [c*2 + c] = 4c
+T(3) = T(2) + [c*3 + c] = 4c + 5c = 8c
+T(4) = T(3) + [c*4 + c] = 8c + 5c = 13c
+T(5) = T(4) + [c*5 + c] = 13c + 6c = 19c
+                ...
+T(n) = ((n+1)*n)/2 + n-4
+
+Portanto, a função de complexidade de tempo do pior caso do insertion sort recursivo realmente é quadrática.
 */
 
 int main () {
