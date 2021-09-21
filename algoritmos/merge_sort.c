@@ -33,7 +33,7 @@ void imprimeVetor(int *vetor, int tamanhoVetor) {
 }
 
 //Ordena os numeros de um vetor por Merge Sort:
-void merge(int *A, int p, int q, int r) {
+void intercala(int *A, int p, int q, int r) {
   int n1 = q-p;   // Difere do livro, pois o primeiro índice de vetores em C é zero, não um.
   int n2 = r-q;
   int i, j, k;
@@ -65,18 +65,17 @@ void merge(int *A, int p, int q, int r) {
       j++;
     }
   }
-
-  // Destruindo os vetores após a ordenação:
+  
   free(L);
   free(R);
 }
 
-void mergeSort(int* A, int p, int r) {
+void ordenaPorIntercalacao(int* A, int p, int r) {
   if (p < r-1) {    //Teste o melhor caso (array de tamanho 1). Porém, difere do livro, pois o primeiro índice de vetores em C é zero.
     int q = (p+r)/2;
-    mergeSort(A, p, q);   // Processando até o ponto médio.
-    mergeSort(A, q, r);   // Processando do ponto médio até o fim.
-    merge(A, p, q, r);    // Combinando as resoluções dos subproblemas.
+    ordenaPorIntercalacao(A, p, q);   // Processando até o ponto médio.
+    ordenaPorIntercalacao(A, q, r);   // Processando do ponto médio até o fim.
+    intercala(A, p, q, r);    // Combinando as resoluções dos subproblemas.
   }
 }
 
@@ -86,9 +85,11 @@ int main() {
 
   imprimeVetor(exemplo, TAMANHO);
 
-  mergeSort(exemplo, 0, TAMANHO);
+  ordenaPorIntercalacao(exemplo, 0, TAMANHO);
 
   imprimeVetor(exemplo, TAMANHO);
+  
+  free(exemplo);
 
   return 0;
 }
