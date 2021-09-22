@@ -90,7 +90,9 @@ T(3) = T(2) + [c*3 + c] = 4c + 5c = 8c
 T(4) = T(3) + [c*4 + c] = 8c + 5c = 13c
 T(5) = T(4) + [c*5 + c] = 13c + 6c = 19c
                 ...
-T(n) = ((n+1)*n)/2 + n-4
+T(n) = 2n-1+(n*(n-1))/2
+T(n) = 2n-1+n²/2-n/2
+T(n) = n²/2+3n/2-1
 
 Portanto, a função de complexidade de tempo do pior caso do insertion sort recursivo realmente é quadrática.
 */
