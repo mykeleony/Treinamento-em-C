@@ -20,7 +20,7 @@ typedef struct {
 } LISTA;
 
 // Inicialização de listas:
-void inicializarListaEncadeadaEstatica(LISTA *lista) {
+void inicializarListaEncadeadaEstatica (LISTA *lista) {
   lista->inicio = -1;
   lista->dispo = 0;
 
@@ -31,7 +31,7 @@ void inicializarListaEncadeadaEstatica(LISTA *lista) {
 }
 
 // Imprime todos os elementos de uma determinada lista linear encadeada:
-void exibirListaEncadeada(LISTA lista) {
+void exibirListaEncadeada (LISTA lista) {
   if (lista.inicio == -1) {
     printf("Lista vazia.\n");
     return;
@@ -48,7 +48,7 @@ void exibirListaEncadeada(LISTA lista) {
 }
 
 // Retorna o número de elementos de uma dada lista linear encadeada:
-int tamanhoListaEncadeada(LISTA lista) {
+int tamanhoListaEncadeada (LISTA lista) {
     int i = lista.inicio, contagem = 0;
 
     while (i > -1) {
@@ -61,7 +61,7 @@ int tamanhoListaEncadeada(LISTA lista) {
 }
 
 // Retorna a chave do primeiro elemento de uma lista linear encadeada:
-TIPOCHAVE chavePrimeiroElementoListaEncadeada(LISTA lista) {
+TIPOCHAVE chavePrimeiroElementoListaEncadeada (LISTA lista) {
   if (lista.inicio > -1)
     return lista.A[lista.inicio];
 
@@ -69,8 +69,8 @@ TIPOCHAVE chavePrimeiroElementoListaEncadeada(LISTA lista) {
 }
 
 // Retorna a chave do último elemento de uma lista linear encadeada:
-TIPOCHAVE chaveUltimoElementoListaEncadeada(LISTA lista) {
-  if(lista.inicio > -1) {
+TIPOCHAVE chaveUltimoElementoListaEncadeada (LISTA lista) {
+  if (lista.inicio > -1) {
     int i = lista.inicio;
 
     while(i > -1) {
@@ -82,6 +82,22 @@ TIPOCHAVE chaveUltimoElementoListaEncadeada(LISTA lista) {
   }
 
   printf("Não há elementos nesta lista.\n")
+}
+
+// Retorna a chave no enésimo elemento de uma determinada lista linear encadeada:
+TIPOCHAVE chaveQualquerElementoListaEncadeada (int posicao, LISTA lista) {
+  if (lista.inicio > -1 && posicao >= 0 && posicao < MAX) {
+    int i = lista.inicio;
+
+    while (i != posicao)
+      i = lista.A[i].prox;
+
+    return lista.A[i].chave;
+  }
+
+  else {
+    printf("Posição inserida inválida ou lista vazia.\n");
+  }
 }
 
 int main() {
