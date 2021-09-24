@@ -105,6 +105,18 @@ void destruirListaEncadeadaEstatica(LISTA *lista) {
   lista->disp = -1;
 }
 
+int posicaoChaveOrdenada(TIPOCHAVE chave, LISTA lista) {
+  int i = lista.inicio;
+
+  while(i != -1 && lista.A[i].chave < chave)
+    i = lista.A[i].prox;
+
+  if (i != -1 && lista.A[i].chave == chave)
+    return i;
+
+  return -1;
+}
+
 int main() {
 
 }
