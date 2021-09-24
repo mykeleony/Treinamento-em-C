@@ -30,13 +30,29 @@ void inicializarListaEncadeadaEstatica(LISTA *lista) {
   lista->A[MAX-1].prox = -1;
 }
 
-// Imprime todos os elementos de uma determinada lista:
+// Imprime todos os elementos de uma determinada lista linear encadeada:
 void exibirListaEncadeada(LISTA lista) {
   int i = lista.inicio;
 
   while (i > -1) {
     printf("%d ", lista.A[i].chave);
     i = lista.A[i].prox;
+  }
+
+  printf("\n");
+
+}
+
+// Retorna o número de elementos de uma dada lista linear encadeada:
+int tamanhoListaEncadeada(LISTA lista) {
+    int i = lista.inicio, contagem = 0;
+
+    while (i > -1) {
+        contagem++;
+        i = lista.prox;
+    }
+
+    return contagem;
   }
 }
 
