@@ -19,7 +19,7 @@ typedef struct {
   int dispo;       // Índice do primeiro elemento da lista livre, de espaços disponíveis na lista linear.
 } LISTA;
 
-// Inicialização:
+// Inicialização de listas:
 void inicializarListaEncadeadaEstatica(LISTA *lista) {
   lista->inicio = -1;
   lista->dispo = 0;
@@ -28,6 +28,16 @@ void inicializarListaEncadeadaEstatica(LISTA *lista) {
     lista->A[i].prox = i+1;
 
   lista->A[MAX-1].prox = -1;
+}
+
+// Imprime todos os elementos de uma determinada lista:
+void exibirListaEncadeada(LISTA lista) {
+  int i = lista.inicio;
+
+  while (i > -1) {
+    printf("%d ", lista.A[i].chave);
+    i = lista.A[i].prox;
+  }
 }
 
 int main() {
