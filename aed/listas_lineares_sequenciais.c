@@ -14,8 +14,9 @@
 // Definição do tipo chave utilizando:
 typedef int TIPOCHAVE;
 
+// Estrutura que agrupa todas as informações da unidade de informação a serem armazenadas:
 typedef struct {
-	TIPOCHAVE chave;
+	TIPOCHAVE chave;						// Característica única a cada elemento, útil a identificação, buscas, etc.
 	// Futuros novos campos...
 } REGISTRO;
 
@@ -76,7 +77,7 @@ TIPOCHAVE ultimoElementoLista(LISTA lista) {
 
 // Fornece o n-ésimo elemento de uma dada lista:
 TIPOCHAVE qualquerElementoLista(int n, LISTA lista) {
-  if (lista.nroElem >= 0)
+  if (n <= lista.nroElem && n > 0)
     return lista.elementos[n].chave;
 
   else
@@ -186,7 +187,7 @@ bool excluirElementoLista(TIPOCHAVE chave, LISTA* lista) {
 // OBS: No caso de alocação dinâmica, basta utilizar a função free().
 void destroiLista(LISTA* lista) {
   lista->nroElem = 0;
-  printf("Lista destruída.\n");
+  printf("Lista linear sequencial destruída.\n");
 }
 
 int main() {
