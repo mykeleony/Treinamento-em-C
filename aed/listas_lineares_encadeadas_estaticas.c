@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdbool.h>
 
 // Tamanho máximo do valor estatico:
 #define MAX 50
@@ -100,22 +101,102 @@ TIPOCHAVE chaveQualquerElementoListaEncadeada (int posicao, LISTA lista) {
 }
 
 // Exclui uma determinada lista linear encadeada:
-void destruirListaEncadeadaEstatica(LISTA *lista) {
+void destruirListaEncadeadaEstatica (LISTA *lista) {
   lista->inicio = -1;
   lista->disp = -1;
 }
 
-int posicaoChaveOrdenada(TIPOCHAVE chave, LISTA lista) {
+// Retorna a posição de uma determinada chave na lista.
+int buscaSequencialOrdenada (TIPOCHAVE chave, LISTA lista, int *anterior) {
   int i = lista.inicio;
 
-  while(i != -1 && lista.A[i].chave < chave)
+  *anterior = -1;
+
+  while(i != -1) {
+    if (lista.A[i].chave >= chave)
+      break;
+
+    *anterior = i;
+
     i = lista.A[i].prox;
+  }
 
   if (i != -1 && lista.A[i].chave == chave)
     return i;
 
   return -1;
 }
+
+// Obter uma posição (nó) disponível - a lista é alterada:
+int obterNoDisponivel (LISTA *lista) {
+  int resultado = lista->dispo;
+
+  if (lista->dispo > -1)
+    lista->dispo = lista->A[lista->dispo].prox;
+
+  return resultado;
+}
+
+// Redisponibilizar uma posição (nó) para a lista de disponíveis - a lista é alterada:
+void devolverNo (LISTA *lista, int j) {
+  lista->A[j].prox = lista->dispo;
+  lista->dispo = j;
+}
+
+// Insere um elemento em uma lista linear encadeada ordenada sem duplicações:
+bool inserirElementoListaEncadeadaOrdenada (TIPOCHAVE chave, LISTA *lista) {
+  int anterior, i;
+
+  i = buscaSequencialOrdenada(chave, *lista, &anterior);
+
+  if (lista->dispo < 0 || i != -1)
+    return false;
+
+  i = obterNoDisponivel(lista);
+
+  lista->A[i].chave = chave;
+
+  if (lista->inicio < 0) {      // Inserção do primeiro elemento de uma lista vazia.
+    lista->inicio = i;
+    lista->A[i].prox = -1;
+  }
+
+  else {
+    if (anterior < 0) {         // Inserção no início de uma lista já existente.
+      lista->A[i].prox = lista->inicio;
+      lista->inicio = i;
+    }
+
+    else {                      // Inserção entre dois elementos.
+      lista->A[i].prox = lista->A[anterior].prox;
+      lista->A[anterior].prox = i;
+    }
+  }
+
+  return true;
+}
+
+// Deleta um dado elemento da lista:
+bool excluirElementoListaEncadeada (TIPOCHAVE chave, LISTA *lista) {
+  int anterior, i;
+
+  i = buscaSequencialOrdenada(chave, *lista, &anterior);
+
+  if (i < 0)
+    return false;
+
+  if (anterior == -1)
+    lista->inicio = lista->A[i].prox;
+
+  else
+    lista->A[anterior].prox = lista->A[i].prox;
+
+  devolverNo(lista, i);
+
+  return true;
+}
+
+bool inserirRegistroOrdenado (REGISTRO)
 
 int main() {
 
