@@ -56,6 +56,12 @@ int tamanhoListaEncadeada(LISTA lista) {
   }
 }
 
+// Retorna a chave do primeiro elemento de uma lista linear encadeada:
+int chavePrimeiroElementoListaEncadeada(TIPOCHAVE chave, LISTA lista) {
+  if (lista.inicio > -1)
+    return lista.A[lista.inicio];
+}
+
 int main() {
 
 }
