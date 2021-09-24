@@ -95,9 +95,14 @@ TIPOCHAVE chaveQualquerElementoListaEncadeada (int posicao, LISTA lista) {
     return lista.A[i].chave;
   }
 
-  else {
+  else
     printf("Posição inserida inválida ou lista vazia.\n");
-  }
+}
+
+// Exclui uma determinada lista linear encadeada:
+void destruirListaEncadeadaEstatica(LISTA *lista) {
+  lista->inicio = -1;
+  lista->disp = -1;
 }
 
 int main() {
