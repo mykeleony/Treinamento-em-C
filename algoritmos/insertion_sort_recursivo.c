@@ -95,6 +95,14 @@ T(n) = 2n-1+n²/2-n/2
 T(n) = n²/2+3n/2-1
 
 Portanto, a função de complexidade de tempo do pior caso do insertion sort recursivo realmente é quadrática.
+
+PROVANDO POR INDUÇÃO:
+
+
+Iniciando pelo caso base:
+base : para n = 1
+(pela def.) T(n) = c
+(pela conj.) T(n) = 
 */
 
 int main () {
