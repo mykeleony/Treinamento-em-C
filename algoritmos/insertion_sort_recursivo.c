@@ -102,7 +102,14 @@ PROVANDO POR INDUÇÃO:
 Iniciando pelo caso base:
 base : para n = 1
 (pela def.) T(n) = c
-(pela conj.) T(n) = 
+(pela conj.) T(n) = c
+
+
+Como os resultados são iguais, para o caso base, definição e conjectura são
+equivalentes.
+Escolhe-se a estratégia de demonstração do passo: Supondo que vale para
+n-1, demonstre que vale para n. Desta forma, o passo indutivo é:
+T(n − 1) = c∗(2(n-1)-1+[(n-1)(n-2)]/2)
 */
 
 int main () {
