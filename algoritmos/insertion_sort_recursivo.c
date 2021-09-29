@@ -124,6 +124,16 @@ Substituindo T(n − 1) pela hipótese de indução e calculando, obtém-se:
 
 T(n) = c*[2(n-1)-1+((n-1)*(n-2))/2+n+1]
 T(n) = c*[3n-2+((n-1)*(n-2))/2]
+T(n) = c*[2n-1+(n-1)+((n-1)*(n-2))/2]
+T(n) = c*[2n-1+(2(n-1)+(n-1)*(n-2))/2]
+
+OBS: 2(n-1)+(n-1)*(n-2) = 2n-2+n²-3n+2 = n²-n = n(n-1)
+
+T(n) = c*(2n-1+(n*(n-1))/2)
+
+
+Que equivale à conjectura, logo, está demonstrado que a conjectura e a definição
+são equivalentes para todo n > 1.
 */
 
 int main () {
