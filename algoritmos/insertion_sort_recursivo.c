@@ -118,6 +118,12 @@ Seguindo para a demonstração, inicia-se com alguma verdade, por exemplo,
 pela definição:
 
 T(n) = T(n−1)+c∗n+c
+
+
+Substituindo T(n − 1) pela hipótese de indução e calculando, obtém-se:
+
+T(n) = c*[2(n-1)-1+((n-1)*(n-2))/2+n+1]
+T(n) = c*[3n-2+((n-1)*(n-2))/2]
 */
 
 int main () {
