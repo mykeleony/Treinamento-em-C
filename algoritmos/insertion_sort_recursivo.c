@@ -108,8 +108,16 @@ base : para n = 1
 Como os resultados são iguais, para o caso base, definição e conjectura são
 equivalentes.
 Escolhe-se a estratégia de demonstração do passo: Supondo que vale para
-n-1, demonstre que vale para n. Desta forma, o passo indutivo é:
+n-1, demonstre que vale para n. Desta forma, a hipótese de indução:
 T(n − 1) = c∗(2(n-1)-1+[(n-1)(n-2)]/2)
+
+
+A hipótese de indução pode ser usada na demonstração do passo indutivo,
+quantas vezes for necessária e quando for conveniente.
+Seguindo para a demonstração, inicia-se com alguma verdade, por exemplo,
+pela definição:
+
+T(n) = T(n−1)+c∗n+c
 */
 
 int main () {
