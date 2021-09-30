@@ -1,3 +1,8 @@
+/* Programa que realiza operações elementares em listas lineares encadeadas com alocação estática.
+   17 de setembro de 2021.
+   Myke Leony dos Santos Amorim - Bacharelado em Sistemas de Informação - EACH USP.
+*/
+
 #include <stdio.h>
 #include <stdbool.h>
 
@@ -196,8 +201,5 @@ bool excluirElementoListaEncadeada (TIPOCHAVE chave, LISTA *lista) {
   return true;
 }
 
-bool inserirRegistroOrdenado (REGISTRO)
-
 int main() {
-
 }
