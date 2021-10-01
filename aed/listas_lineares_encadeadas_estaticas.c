@@ -150,11 +150,14 @@ void devolverNo (LISTA *lista, int j) {
 
 // Insere um elemento em uma lista linear encadeada ordenada sem duplicações:
 bool inserirElementoListaEncadeadaOrdenada (TIPOCHAVE chave, LISTA *lista) {
+  if (lista->dispo < 0)
+    return false;
+
   int anterior, i;
 
   i = buscaSequencialOrdenada(chave, *lista, &anterior);
 
-  if (lista->dispo < 0 || i != -1)
+  if (i != -1)
     return false;
 
   i = obterNoDisponivel(lista);
@@ -202,4 +205,5 @@ bool excluirElementoListaEncadeada (TIPOCHAVE chave, LISTA *lista) {
 }
 
 int main() {
+
 }
