@@ -1,4 +1,4 @@
-/* Programa que realiza operações elementares em listas lineares encadeadas com alocação dinâmica.
+/* Programa que realiza operações elementares em listas lineares encadeadas com alocação dinâmica e uso de nó sentinela para otimizar a busca sequencial.
    17 de setembro de 2021.
    Myke Leony dos Santos Amorim - Bacharelado em Sistemas de Informação - EACH USP.
 */
