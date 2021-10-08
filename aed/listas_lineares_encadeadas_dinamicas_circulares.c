@@ -7,11 +7,6 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-// Tamanho máximo do valor estatico:
-#define MAX 50
-
-#define VALOR_INVALIDO -1
-
 // Definição do tipo chave utilizando:
 typedef int TIPOCHAVE;
 
