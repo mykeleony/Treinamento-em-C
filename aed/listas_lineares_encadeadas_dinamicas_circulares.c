@@ -129,7 +129,7 @@ NO* buscaSequencialOrdenada (TIPOCHAVE chave, LISTA lista, NO* *anterior) {
   }
 }
 
-// Insere um elemento na lista linear encadeada sem repetição com sentinela:
+// Insere um elemento na lista linear encadeada circular sem repetição:
 bool inserirElementoListaEncadeadaOrdenada (TIPOCHAVE chave, LISTA lista*) {
   NO* elemento, anterior;
 
@@ -148,8 +148,8 @@ bool inserirElementoListaEncadeadaOrdenada (TIPOCHAVE chave, LISTA lista*) {
   return true;
 }
 
-// Exclui um elemento específico da lista linear encadeada:
-bool excluirElementoListaEncadeada(TIPOCHAVE chave, LISTA* lista) {
+// Exclui um elemento específico da lista linear encadeada circular:
+bool excluirElementoListaEncadeada(TIPOCHAVE chave, LISTA lista) {
   NO* elemento, anterior;
 
   elemento = buscaSequencialOrdenada(chave, *lista, &anterior);
@@ -164,30 +164,24 @@ bool excluirElementoListaEncadeada(TIPOCHAVE chave, LISTA* lista) {
   return true;
 }
 
-// Insere um elemento na última posição da lista linear encadeada:
+// Insere um elemento na última posição da lista linear encadeada circular com nó cabeça:
 void anexarElementoListaEncadeada (TIPOCHAVE chave, LISTA *lista) {
   NO* elemento, anterior;
 
-  anterior = ultimoElementoLista(*l);
+  anterior = ultimoElementoLista(*lista);
 
   elemento = (NO*) malloc(sizeof(NO));
 
   elemento->chave = chave;
-  elemento->prox = lista->sentinela;
-
-  if(anterior == NULL)
-    lista->inicio = novo;
-
-  else
-    anterior->prox = novo;
+  elemento->prox = lista->cabeca;
+  anterior->prox = elemento;
 }
 
-
-// Destrói uma lista linear encadeada com sentinela:
+// Destrói (mais precisamente, reinicia) uma lista linear encadeada circular com nó cabeça:
 void destruirListaEncadeadaDinamica (LISTA* lista) {
-  NO* atual = lista->inicio, prox;
+  NO* atual = lista->cabeca->prox, prox;
 
-  while (atual != lista->sentinela) {
+  while (atual != lista->cabeca) {
     prox = atual->prox;   // Preserva a posição seguinte.
 
     free(atual);          // Libera a memória alocada pela estrutura atual.
@@ -195,7 +189,7 @@ void destruirListaEncadeadaDinamica (LISTA* lista) {
     atual = prox;         // Ajusta o início da lista (vazia).
   }
 
-  lista->inicio = lista->sentinela;
+  lista->cabeca->prox = lista->cabeca;  // Permite a reutilização da lista.
 }
 
 int main() {
