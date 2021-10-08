@@ -17,7 +17,7 @@ typedef struct estrutura {
 } NO;
 
 typedef struct {
-  NO* cabeca;    // Sentinela utilizada na busca com sentinela.
+  NO* cabeca;    // Estrutura anterior ao primeiro elemento da lista, que também é utilizada como sentinela na busca sequencial.
 } LISTA;
 
 // Cria uma lista vazia:
