@@ -1,0 +1,189 @@
+/* Programa que realiza operações elementares em listas lineares circulares duplamente encadeadas com alocação dinâmica e nó cabeça.
+   01 de outubro de 2021.
+   Myke Leony dos Santos Amorim - Bacharelado em Sistemas de Informação - EACH USP.
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+
+// Definição do tipo chave utilizando:
+typedef int TIPOCHAVE;
+
+typedef struct estrutura {
+  TIPOCHAVE chave;
+  struct estrutura *prox;
+  struct estrutura *ant;    // Além do indicador do próximo elemento da lista, o segundo encadeamento se dá pela indicação do elemento anterior.
+  // Outros campos...
+} NO;
+
+typedef struct {
+  NO* cabeca;    // Estrutura anterior ao primeiro elemento da lista, que também é utilizada como sentinela na busca sequencial.
+} LISTA;
+
+// Cria uma lista vazia:
+void inicializarListaEncadeadaDinamica (LISTA* lista) {
+  lista->cabeca = (NO*) malloc(sizeof(NO));
+
+  lista->cabeca->prox = lista->cabeca;
+  lista->cabeca->ant = lista->cabeca;   // Marcas de uma lista vazia.
+}
+
+// Imprime o conteúdo de uma lista:
+void imprimeListaEncadeadaDinamica (LISTA lista) {
+  if (lista.cabeca->prox != lista.cabeca) {
+    NO* i = lista.cabeca->prox;
+
+    while (i != lista.cabeca) {
+      printf("%d ", i->chave);  // Nesse caso, a chave é um número inteiro.
+      i = i->prox;
+    }
+  }
+
+  else
+    printf("Lista vazia.");
+
+  printf("\n");
+}
+
+// Retorna a chave do primeiro elemento da lista linear encadeada circular:
+TIPOCHAVE chavePrimeiroElementoListaEncadeada (LISTA lista) {
+  if (lista.cabeca->prox == lista.cabeca) {
+    printf("Não há chaves na lista, pois ela está vazia.\n");
+    return;
+  }
+
+  return lista.cabeca->prox->chave;
+}
+
+// Retorna o último elemento da lista linear encadeada circular:
+TIPOCHAVE ultimoElementoListaEncadeada (LISTA lista) {
+  if (lista.cabeca->prox == lista.cabeca)
+    return NULL;
+
+  return lista.cabeca->ant;  // O elemento anterior ao nó cabeça é o último elemento.
+}
+
+
+// Retorna o tamanho de uma lista linear encadeada circular com nó cabeça:
+int tamanhoLista (LISTA lista) {
+  int n = 0;
+  NO* i = lista.cabeca->prox;
+
+  while (i != lista.cabeca) {
+    n++;
+
+    i = i->prox;
+  }
+
+  return n;
+}
+
+// Retorna a chave do elemento em uma dada posição da lista linear encadeada circular com nó cabeça:
+TIPOCHAVE chaveEnesimoElementoListaEncadeada (LISTA lista, int posicao) {
+  NO* i = lista.cabeca->prox;
+  int j = 1;
+
+  while (i->prox != lista.cabeca && j < posicao) {
+    i = i->prox;
+    j++;
+  }
+
+  if (j != posicao) {
+    printf("A posição inserida é inválida ou a lista está vazia.\n");
+    return;
+  }
+
+  else
+    return i->chave;
+}
+
+// Busca uma chave na lista linear duplamente encadeada dinâmica circular com nó cabeça e retorna sua posição (além do elemento anterior):
+NO* buscaSequencialOrdenada (TIPOCHAVE chave, LISTA lista, NO* *anterior) {
+  NO* i = lista.cabeca->prox;
+
+  *anterior = lista.cabeca;
+
+  lista.cabeca->chave = chave;
+
+  while (i->chave < chave) {
+    *anterior = i;
+    i = i->prox;
+  }
+
+  if (i != lista.cabeca && i->chave == chave)
+    return i;
+
+  else {
+    printf("A chave %d não foi encontrada na lista.\n", chave);
+    return NULL;
+  }
+}
+
+// Insere um elemento na lista linear duplamente encadeada circular sem repetição:
+bool inserirElementoListaEncadeadaOrdenada (TIPOCHAVE chave, LISTA lista*) {
+  NO* elemento, anterior;
+
+  elemento = buscaSequencialOrdenada(chave, *lista, &anterior);
+
+  if(elemento)
+    return false;
+
+  elemento = (NO*) malloc(sizeof(NO));
+  elemento->chave = chave;
+
+  // Como a lista é circular e possui nó cabeça, não é necessária nenhuma testagem para inserir a chave - basta ajustar os ponteiros:
+  elemento->prox = anterior->prox;
+  elemento->ant = anterior;
+  elemento->prox->ant = elemento;
+  anterior->prox = elemento;
+
+  return true;
+}
+
+// Exclui um elemento específico da lista linear duplamente encadeada circular:
+bool excluirElementoListaEncadeada(TIPOCHAVE chave, LISTA lista) {
+  NO* elemento, anterior;
+
+  elemento = buscaSequencialOrdenada(chave, *lista, &anterior);
+
+  if(elemento == NULL)
+    return false;
+
+  anterior->prox = elemento->prox;
+  elemento->prox->anterior = anterior;
+
+  free(elemento);
+
+  return true;
+}
+
+// Insere um elemento na última posição da lista linear duplamente encadeada circular com nó cabeça:
+void anexarElementoListaEncadeada (TIPOCHAVE chave, LISTA *lista) {
+  NO* elemento, anterior;
+
+  anterior = ultimoElementoLista(*lista);
+
+  elemento = (NO*) malloc(sizeof(NO));
+
+  elemento->chave = chave;
+  elemento->prox = lista->cabeca;
+  anterior->prox = elemento;
+  lista->cabeca->ant = elemento;
+}
+
+// Destrói (mais precisamente, reinicia) uma lista linear duplamente encadeada circular com nó cabeça:
+void destruirListaEncadeadaDinamica (LISTA* lista) {
+  NO* atual = lista->cabeca->prox, prox;
+
+  while (atual != lista->cabeca) {
+    prox = atual->prox;   // Preserva a posição seguinte.
+
+    free(atual);          // Libera a memória alocada pela estrutura atual.
+
+    atual = prox;         // Ajusta o início da lista (vazia).
+  }
+
+  lista->cabeca->ant = lista->cabeca;
+  lista->cabeca->prox = lista->cabeca; // Permite a reutilização da lista.
+}
