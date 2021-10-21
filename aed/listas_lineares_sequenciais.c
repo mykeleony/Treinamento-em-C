@@ -32,7 +32,11 @@ void inicializarListaVazia (LISTA* lista) {   // O ponteiro é utilizado para a 
 }
 
 void inicializarLista (int tamanho, LISTA* lista) {
-  lista->nroElem = tamanho;
+	if (tamanho <= MAX)
+		lista->nroElem = tamanho;
+
+	else
+		printf("O tamanho inserido é inválido.\n");
 }
 
 // Fornece o número de elementos de uma dada lista linear sequencial:
