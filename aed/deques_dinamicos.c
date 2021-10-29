@@ -1,4 +1,4 @@
-/* Programa que realiza operações elementares em deques de implementação dinâmica.
+/* Programa que realiza operações elementares em deques (Double Ended Queues - Fila Duplamente Terminada) de implementação dinâmica.
    22 de outubro de 2021.
    Myke Leony dos Santos Amorim - Bacharelado em Sistemas de Informação - EACH USP.
 */
@@ -72,10 +72,10 @@ TIPOCHAVE retirarDeque1 (DEQUE* deque) {
   free(elemento_a_excluir);
 
   if (deque->inicio1 == NULL)
-    deque->inicio2 = NULL;  // Após a remoção, a lista ficou vazia.
+    deque->inicio2 = NULL;  // Após a remoção, o deque ficou vazio.
 
   else
-    deque->inicio1->ant == NULL;  // A lista ainda possui elementos após a remoção.
+    deque->inicio1->ant == NULL;  // O deque ainda possui elementos após a remoção.
 
   return chave_a_excluir;
 }
