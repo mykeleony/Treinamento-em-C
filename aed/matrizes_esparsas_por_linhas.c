@@ -1,3 +1,8 @@
+/* Programa que realiza operações elementares em matrizes esparsas ordenadas por linhas.
+   29 de outubro de 2021.
+   Myke Leony dos Santos Amorim - Bacharelado em Sistemas de Informação - EACH USP.
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
