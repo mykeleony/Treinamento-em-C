@@ -31,7 +31,7 @@ bool arvoreVazia (NO* raiz) {
 }
 
 // Insere um nó em uma árvore binária comum (sem ordenação):
-bool inserirNo (NO* *raiz, NO* pai, TIPOCHAVE chave, LADO posicao) {
+bool insereNo (NO* *raiz, NO* pai, TIPOCHAVE chave, LADO posicao) {
   if (pai && (posicao == esq && pai->esq || posicao == dir && pai->dir)) // Caso a posição a inserir já esteja ocupada, não é possível inserir.
     return false;
 
