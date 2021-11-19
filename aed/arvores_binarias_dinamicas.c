@@ -41,7 +41,7 @@ bool inserirNo (NO* *raiz, NO* pai, TIPOCHAVE chave, LADO posicao) {
   elemento->esq = NULL;
   elemento->dir = NULL;
 
-  if (!pai)  // Inserindo uma nova raiz ou atualiza a antiga.
+  if (!pai)  // Inserindo uma nova raiz ou atualizando a antiga.
     *raiz = elemento;
 
   else if (posicao == esq)
