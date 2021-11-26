@@ -31,7 +31,7 @@ bool arvoreVazia (NO* raiz) {
 }
 
 // Insere um nó em uma árvore binária comum (sem ordenação):
-bool insereNo (NO* *raiz, NO* pai, TIPOCHAVE chave, LADO posicao) {
+bool inserirNo (NO* *raiz, NO* pai, TIPOCHAVE chave, LADO posicao) {
   if (pai && (posicao == esq && pai->esq || posicao == dir && pai->dir)) // Caso a posição a inserir já esteja ocupada, não é possível inserir.
     return false;
 
@@ -41,7 +41,7 @@ bool insereNo (NO* *raiz, NO* pai, TIPOCHAVE chave, LADO posicao) {
   elemento->esq = NULL;
   elemento->dir = NULL;
 
-  if (!pai)  // Inserindo uma nova raiz ou atualizando a antiga.
+  if (!pai)  // Inserindo uma nova raiz ou atualiza a antiga.
     *raiz = elemento;
 
   else if (posicao == esq)
@@ -51,6 +51,33 @@ bool insereNo (NO* *raiz, NO* pai, TIPOCHAVE chave, LADO posicao) {
     pai->dir = elemento;
 
   return true;
+}
+
+// Percorre a árvore binária em pré-ordem (raiz, esquerda e direita) de maneira recursiva:
+void preOrdem (NO* no) {
+  if (no) {
+    printf("%d ", no->chave);  // Visita ao nó.
+    preOrdem(no->esq);
+    preOrdem(no->dir);
+  }
+}
+
+// Percorre a árvore binária em ordem simétrica (esquerda, raiz e direita):
+void emOrdem (NO* no) {
+  if (no) {
+    emOrdem(no->esq);
+    printf("%d ", no->chave);
+    emOrdem(no->dir);
+  }
+}
+
+// Percorre a árvore binária em pós-ordem (esquerda, direita e raiz):
+void posOrdem (NO* no) {
+  if (no) {
+    posOrdem(no->esq);
+    posOrdem(no->dir);
+    printf("%d ", no->chave);
+  }
 }
 
 void main() {
