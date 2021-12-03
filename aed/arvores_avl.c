@@ -63,6 +63,8 @@ void destroiAVL (NO* *atual) {
 }
 
 void main() {
+  /*
+  // Testagens:
   NO* raiz;
 
   inicializaAVL(&raiz);
@@ -70,4 +72,5 @@ void main() {
   printf("%d\n", ehAVL(raiz));
 
   destroiAVL(&raiz);
+  */
 }
