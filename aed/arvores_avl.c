@@ -138,32 +138,11 @@ NO* duplaRotacaoDE(NO* p) {
   return v;
 }
 
-
 // Rotaciona à esquerda e, em seguida, à direita do nó p e retorna a nova raiz:
 NO* duplaRotacaoED(NO* p) {
-  NO* u = p->esq;
-  NO* v = u->dir;
+  rotacaoEsquerda(p);
 
-  u->dir = v->esq;
-  v->esq = u;
-  p->esq = v->dir;
-  v->dir = p;
-
-  if(v->bal == -1)
-    p->bal = 1;
-
-  else
-    p->bal = 0;
-
-  if(v->bal == 1)
-    u->bal = -1;
-
-  else
-    u->bal = 0;
-
-  v->bal = 0;
-
-  return v;
+  return rotacaoDireita(p);
 }
 
 NO* insereAVL (NO* p, TIPOCHAVE chave, bool* ajustar) {
@@ -179,15 +158,17 @@ NO* insereAVL (NO* p, TIPOCHAVE chave, bool* ajustar) {
   }
 
   else {
-    if (chave == p->chave)
-      *ajustar = false;
-
-    else if (chave <= p->chave) {
+    if (chave <= p->chave) {
       p->esq = insereAVL(p->esq, chave, ajustar);
 
       if(*ajustar)
         switch(p->bal) {
-          case 1:   p->bal = 0;
+          case -1:  if (p->esq->bal == -1)
+                      p = rotacaoDireita(p);
+
+                    else
+                      p = duplaRotacaoED(p);
+
                     *ajustar = false;
 
                     break;
@@ -195,12 +176,7 @@ NO* insereAVL (NO* p, TIPOCHAVE chave, bool* ajustar) {
           case 0:   p->bal = -1;
                     break;
 
-          case -1:  if (p->esq->bal == -1)
-                      p = rotacaoDireita(p);
-
-                    else
-                      p = duplaRotacaoED(p);
-
+          case 1:   p->bal = 0;
                     *ajustar = false;
 
                     break;
@@ -212,7 +188,12 @@ NO* insereAVL (NO* p, TIPOCHAVE chave, bool* ajustar) {
 
       if(*ajustar) {
         switch(p->bal) {
-          case -1:  p->bal = 0;
+          case 1:  if (p->dir->bal == 1)
+                      p = rotacaoEsquerda(p);
+
+                    else
+                      p = duplaRotacaoDE(p);
+
                     *ajustar = false;
 
                     break;
@@ -220,12 +201,7 @@ NO* insereAVL (NO* p, TIPOCHAVE chave, bool* ajustar) {
           case 0:   p->bal = 1;
                     break;
 
-          case 1:  if (p->dir->bal == 1)
-                      p = rotacaoEsquerda(p);
-
-                    else
-                      p = duplaRotacaoDE(p);
-
+          case -1:  p->bal = 0;
                     *ajustar = false;
 
                     break;
@@ -250,7 +226,7 @@ void destroiAVL (NO* *atual) {
 }
 
 void main() {
-  // Testagens:
+  // Testagens: 
   NO* raiz;
 
   inicializaAVL(&raiz);
