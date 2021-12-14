@@ -5,35 +5,16 @@ Introdução à Análise de Algoritmos - Sistemas de Informação: USP.
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #include <math.h>
 
-#define n 10
-
-void troca(int* a, int* b) {
-  int t = *a;
-
-  a = b;
-  *b = t;
-}
+#define tam 10
 
 int *criaVetor (int tamanho) {
   int* vetor = malloc(sizeof(int)*tamanho);
 
   for (int i = 0; i < tamanho; i++)
     vetor[i] = random() % 20;
-
-  return vetor;
-}
-
-int *criaHeap (int tamanho, int* vetor) {
-  for (int i = 1; i < tamanho; i++) {
-    int j = i+1;
-
-    while (j > 1 && vetor[j/2] < vetor[j]) {
-      troca(&vetor[j/2], &vetor[j]);
-      j /= 2;
-    }
-  }
 
   return vetor;
 }
@@ -53,29 +34,53 @@ void destroiHeap (int* heap) {
   free(heap);
 }
 
-void maxHeapify (int* heap, int elemento) {
-  int esquerdo = 2*elemento;
-  int direito = 2*elemento+1;
-  int maior;
+void heapsort(int* a, int n) {
+   int i = n/2, pai, filho, t;
 
-  if (esquerdo <= n && heap[esquerdo] > heap[direito])
-    maior = esquerdo;
+   while(true) {
 
-  else
-    maior = elemento;
+      if (i > 0) {
+          i--;
+          t = a[i];
+      }
 
-  if (direito <= n && heap[direito] > heap[esquerdo])
-    maior = direito;
+      else {
+          n--;
 
-  if (maior != elemento) {
-    troca(&heap[esquerdo], &heap[direito]);
-    maxHeapify(heap, maior);
-  }
+          if (n <= 0)
+            return;
+
+          t = a[n];
+
+          a[n] = a[0];
+      }
+
+      pai = i;
+      filho = i * 2 + 1;
+
+      while (filho < n) {
+          if (filho + 1 < n  &&  a[filho + 1] > a[filho])
+              filho++;
+
+          if (a[filho] > t) {
+             a[pai] = a[filho];
+             pai = filho;
+             filho = pai * 2 + 1;
+          }
+
+          else {
+             break;
+          }
+      }
+
+      a[pai] = t;
+   }
 }
 
 void main () {
-  int* vetor = criaVetor(n);
-  //int* heap = criaHeap(n, vetor);
-  imprimeHeap(vetor, n);
-  //destroiHeap(heap);
+  int* vetor = criaVetor(tam);
+  imprimeHeap(vetor, tam);
+  heapsort(vetor, tam);
+  imprimeHeap(vetor, tam);
+  destroiHeap(vetor);
 }
