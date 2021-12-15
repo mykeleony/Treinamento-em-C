@@ -53,5 +53,14 @@ int partition (int* vetor, int inicio, int fim) {
   return i+1;
 }
 
+// Ordena uma lista de números realizando Quicksort:
+void quicksort (int* vetor, int inicio, int fim) {
+  if (inicio < fim) {
+    int indice_pivo = partition(vetor, inicio, fim);
+    quicksort(vetor, inicio, indice_pivo-1);
+    quicksort(vetor, indice_pivo+1, fim);
+  }
+}
+
 void main() {
 }
