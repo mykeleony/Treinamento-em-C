@@ -63,4 +63,10 @@ void quicksort (int* vetor, int inicio, int fim) {
 }
 
 void main() {
+  // Testagens: 
+  int* teste = criaVetor(n);
+  imprimeVetor(teste, n);
+  quicksort(teste, 0, n-1);
+  imprimeVetor(teste, n);
+  destroiVetor(teste);
 }
