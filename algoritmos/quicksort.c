@@ -33,5 +33,25 @@ void destroiVetor (int* vetor) {
   free(vetor);
 }
 
+// Retorna o índice do elemento pivô após seu posicionamento correto no array:
+int partition (int* vetor, int inicio, int fim) {
+  int pivo = vetor[fim], i = inicio-1;
+
+  for (int j = inicio; j < fim-1; j++)
+    if (vetor[j] <= pivo) {
+      i += 1;
+
+      int auxiliar1 = vetor[i];
+      vetor[i] = vetor[j];
+      vetor[j] = auxiliar1;
+    }
+
+  int auxiliar2 = vetor[i+1];
+  vetor[i+1] = vetor[fim];
+  vetor[fim] = auxiliar2;
+
+  return i+1;
+}
+
 void main() {
 }
