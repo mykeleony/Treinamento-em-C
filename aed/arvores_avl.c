@@ -213,6 +213,10 @@ NO* insereAVL (NO* p, TIPOCHAVE chave, bool* ajustar) {
   return p;
 }
 
+void removeAVL() {
+  
+}
+
 // Destrói uma árvore AVL:
 void destroiAVL (NO* *atual) {
   if (*atual) {  // Evita ponteiro para endereço inválido.
@@ -226,7 +230,7 @@ void destroiAVL (NO* *atual) {
 }
 
 void main() {
-  // Testagens: 
+  // Testagens
   NO* raiz;
 
   inicializaAVL(&raiz);
