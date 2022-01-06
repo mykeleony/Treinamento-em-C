@@ -8,6 +8,11 @@
 #include <stdbool.h>
 
 typedef int TIPOCHAVE;
+typedef char BOOL;
+
+#define VALOR_INVALIDO -2
+#define TRUE 'V'
+#define FALSE 'F'
 
 typedef struct estrutura {
   TIPOCHAVE chave;
