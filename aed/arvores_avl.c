@@ -76,6 +76,11 @@ int h (NO* raiz) {
   }
 }
 
+// Retorna o fator de balanceamento de um nó, calculado pela diferença entre as alturas da subárvore direita e esquerda deste.
+int balanceamento (NO* no) {
+  return h(no->dir) - h(no->esq);
+}
+
 void imprimeAVL (NO* raiz) {
   if (!raiz) {
 
