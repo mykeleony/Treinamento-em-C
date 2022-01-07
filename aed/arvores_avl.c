@@ -328,13 +328,15 @@ void destroiAVL (NO* *atual) {
 }
 
 void main() {
-  // Testagens
+  // Testagens:
   NO* raiz;
 
   inicializaAVL(&raiz);
 
   bool ajustar = false;
 
+  /*
+  // Árvore 1:
   raiz = insereAVL(raiz, 65, &ajustar);
 
   printf("%d\n", raiz->chave);
@@ -348,10 +350,72 @@ void main() {
   raiz = insereAVL(raiz, 88, &ajustar);
   raiz = insereAVL(raiz, 96, &ajustar);
   raiz = insereAVL(raiz, 43, &ajustar);
+  */
 
-  printf("%d\n", ehAVL(raiz));
-  preOrdem(raiz);
+  /*
+  // Árvore 2:
+  raiz = insereAVL(raiz, 3, &ajustar);
+  raiz = insereAVL(raiz, 2, &ajustar);
+  raiz = insereAVL(raiz, 1, &ajustar);
+  raiz = insereAVL(raiz, 4, &ajustar);
+  raiz = insereAVL(raiz, 5, &ajustar);
+  raiz = insereAVL(raiz, 6, &ajustar);
+  raiz = insereAVL(raiz, 7, &ajustar);
+
+  //printf("%d\n", ehAVL(raiz));
+  printf("("); imprimeAVL(raiz);
   printf("\n");
+  */
+
+  /*
+  //Árvore 3:
+  raiz = insereAVL(raiz, 10, &ajustar);
+  raiz = insereAVL(raiz, 9, &ajustar);
+  raiz = insereAVL(raiz, 8, &ajustar);
+  raiz = insereAVL(raiz, 7, &ajustar);
+  raiz = insereAVL(raiz, 11, &ajustar);
+  raiz = insereAVL(raiz, 12, &ajustar);
+  raiz = insereAVL(raiz, 13, &ajustar);
+  raiz = insereAVL(raiz, 6, &ajustar);
+  raiz = insereAVL(raiz, 5, &ajustar);
+  raiz = insereAVL(raiz, 14, &ajustar);
+  raiz = insereAVL(raiz, 0, &ajustar);
+  raiz = insereAVL(raiz, 50, &ajustar);
+  */
+
+  /*
+  // Árvore 4:
+  raiz = insereAVL(raiz, 3, &ajustar);
+  raiz = insereAVL(raiz, 5, &ajustar);
+  raiz = insereAVL(raiz, 15, &ajustar);
+  raiz = insereAVL(raiz, 4, &ajustar);
+  raiz = insereAVL(raiz, 2, &ajustar);
+  raiz = insereAVL(raiz, 18, &ajustar);
+  raiz = insereAVL(raiz, 7, &ajustar);
+  raiz = insereAVL(raiz, 21, &ajustar);
+  raiz = insereAVL(raiz, 8, &ajustar);
+  raiz = insereAVL(raiz, 22, &ajustar);
+
+  printf("("); imprimeAVL(raiz); printf("\n");
+
+  removeAVL(&raiz, 5, &ajustar);
+
+  printf("("); imprimeAVL(raiz); printf("\n");
+
+  printf("%c\n", ehAVL(raiz));
+  */
+
+
+  // Árvore 5:
+  NO* a = criaNO(3);
+  a->esq = criaNO(2);
+  a->esq->esq = criaNO(1);
+
+  printf("("); imprimeAVL(a); printf("\n");
+
+  printf("%c", ehAVL(a));
+  printf("\n");
+
 
   destroiAVL(&raiz);
 }
