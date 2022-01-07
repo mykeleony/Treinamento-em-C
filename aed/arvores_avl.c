@@ -110,6 +110,25 @@ NO* rotacaoEsquerda(NO* p) {
   return u;
 }
 
+NO* rotacaoAuxiliarEsquerda (NO* p) {
+  NO* u = p->esq;
+  u->dir = p;
+  u->bal = 1;
+
+  return u;
+}
+
+NO* rotacaoAuxiliarDireita (NO* p) {
+  NO* u = p->dir;
+
+  p->dir = u->esq;
+  u->esq = p;
+
+  u->bal = -1;
+
+  return u;
+}
+
 // Rotaciona à direita e, em seguida, à esquerda do nó p e retorna a nova raiz:
 NO* duplaRotacaoDE(NO* p) {
   NO* u = p->dir;
