@@ -61,6 +61,37 @@ void posOrdem (NO* no) {
   }
 }
 
+void imprimeAVL (NO* raiz) {
+  if (!raiz) {
+
+    return;
+  }
+
+  printf("%d", raiz->chave);
+
+  if (raiz->esq || raiz->dir) {
+    printf("(");
+
+    if (!raiz->esq)
+      printf(")");
+
+    imprimeAVL(raiz->esq);
+
+    if (!raiz->dir)
+      printf("()");
+
+    else
+      printf("(");
+
+    imprimeAVL(raiz->dir);
+
+    printf(")");
+  }
+
+  else
+    printf(")");
+}
+
 // Verifica se uma árvore é AVL:
 bool ehAVL (NO* raiz) {
   if (raiz) {
