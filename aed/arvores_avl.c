@@ -162,11 +162,34 @@ NO* duplaRotacaoDE(NO* p) {
   return v;
 }
 
-// Rotaciona à esquerda e, em seguida, à direita do nó p e retorna a nova raiz:
 NO* duplaRotacaoED(NO* p) {
-  rotacaoEsquerda(p);
+  NO* u = p->esq;
+  NO* v = u->dir;
 
-  return rotacaoDireita(p);
+  u->dir = v->esq;
+  p->esq = v->dir;
+  v->dir = p;
+  v->esq = u;
+
+  // Atualizando o balanceamento em função do nó v:
+  switch (v->bal) {
+    case -1:  p->bal = 1;
+              u->bal = 0;
+              break;
+
+    case 0:   p->bal = 0;
+              u->bal = 0;
+              break;
+
+    case 1:   p->bal = 0;
+              u->bal = -1;
+              break;
+  }
+
+  v->bal = 0;
+
+
+  return v;
 }
 
 NO* insereAVL (NO* p, TIPOCHAVE chave, bool* ajustar) {
