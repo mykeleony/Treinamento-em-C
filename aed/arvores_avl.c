@@ -61,6 +61,21 @@ void posOrdem (NO* no) {
   }
 }
 
+// Retorna a altura de uma árvore ou subárvore:
+int h (NO* raiz) {
+  if (raiz == NULL)
+    return 0;  // Árvore ou subárvore vazia.
+
+  else {
+    // A altura é dada pela MAIOR das subárvores:
+    if (h(raiz->esq) > h(raiz->dir))
+      return h(raiz->esq)+1;   // A adição é necessária pois o valor retornado na visita ao último elemento da subárvore é -1.
+
+    else
+      return h(raiz->dir)+1;
+  }
+}
+
 void imprimeAVL (NO* raiz) {
   if (!raiz) {
 
