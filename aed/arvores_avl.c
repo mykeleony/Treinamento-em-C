@@ -256,7 +256,10 @@ NO* insereAVL (NO* p, TIPOCHAVE chave, bool* ajustar) {
   }
 
   else {
-    if (chave <= p->chave) {
+    if (chave == p->chave)
+      *ajustar = false;
+
+    else if (chave < p->chave) {
       p->esq = insereAVL(p->esq, chave, ajustar);
 
       if(*ajustar)
@@ -264,8 +267,11 @@ NO* insereAVL (NO* p, TIPOCHAVE chave, bool* ajustar) {
           case -1:  if (p->esq->bal == -1)
                       p = rotacaoDireita(p);
 
-                    else
+                    else if (p->esq->bal == 1)
                       p = duplaRotacaoED(p);
+
+                    else
+                      p = rotacaoAuxiliarEsquerda(p);
 
                     *ajustar = false;
 
@@ -289,11 +295,13 @@ NO* insereAVL (NO* p, TIPOCHAVE chave, bool* ajustar) {
           case 1:  if (p->dir->bal == 1)
                       p = rotacaoEsquerda(p);
 
-                    else
+                    else if (p->dir->bal == -1)
                       p = duplaRotacaoDE(p);
 
-                    *ajustar = false;
+                    else
+                      p = rotacaoAuxiliarDireita(p);
 
+                    *ajustar = false;
                     break;
 
           case 0:   p->bal = 1;
