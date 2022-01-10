@@ -329,8 +329,108 @@ NO* maiorL (NO* no) {
   return no;
 }
 
-void removeAVL() {
-  
+// Exclui o elemento da árvore AVL que possui a chave especificada:
+bool removeAVL(NO* *raiz, TIPOCHAVE chave, bool* ajustar) {
+  NO* aux = *raiz;
+
+  if (aux == NULL) {
+    *ajustar = false;
+
+    return false;
+  }
+
+  if (aux->chave == chave) {  // Chave encontrada.
+    NO* nova;
+
+    if (aux->esq == NULL || aux->dir == NULL) { // A raiz possui menos de 2 filhos.
+      if (aux->esq != NULL)
+        nova = aux->esq;
+
+      else
+        nova = aux->dir;
+
+      *raiz = nova;
+
+      free(aux);
+
+      *ajustar = true;
+
+      return true;
+    }
+
+    else {
+      // Se a raiz possui um ou nenhum filho, o elemento mais à direita da subárvore esquerda da raiz deve substituir o nó excluído.
+      nova = maiorL(aux);
+      aux->chave = nova->chave;
+      chave = nova->chave;
+    }
+  }
+
+  bool fim_subarvore;
+
+  if (chave > aux->chave) {  // Buscando chave.
+    fim_subarvore = removeAVL(&(aux->dir), chave, ajustar);  // Exclusão em pós-ordem.
+
+    if (*ajustar) {
+      switch (aux->bal) {
+        case -1:  if (aux->dir->bal == 1)
+                    *raiz = rotacaoEsquerda(*raiz);
+
+                  else if (aux->dir->bal == -1)
+                    *raiz = duplaRotacaoDE(*raiz);
+
+                  else
+                    *raiz = rotacaoAuxiliarDireita(*raiz);
+
+                  if (aux->bal != 0)
+                    *ajustar = false;
+
+                  return true;
+
+        case 0:   aux->bal = -1;
+                  *ajustar = false;
+
+                  return true;
+
+        case 1:   aux->bal = 0;
+
+                  return true;
+      }
+    }
+  }
+
+  else {
+    fim_subarvore = removeAVL(&(aux->esq), chave, ajustar);
+
+    if (*ajustar) {
+      switch(aux->bal) {
+        case -1:  aux->bal = 0;
+
+                  return true;
+
+        case 0:   aux->bal = 1;
+                  *ajustar = false;
+
+                  return true;
+
+        case 1:   if (aux->dir->bal == 1)
+                    *raiz = rotacaoEsquerda(*raiz);
+
+                  else if (aux->dir->bal == -1)
+                    *raiz = duplaRotacaoDE(*raiz);
+
+                  else
+                    *raiz = rotacaoAuxiliarDireita(*raiz);
+
+                  if (aux->bal != 0) {
+                    *ajustar = false;
+                    return true;
+                  }
+      }
+    }
+  }
+
+  return fim_subarvore;
 }
 
 // Destrói uma árvore AVL:
