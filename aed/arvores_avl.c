@@ -319,6 +319,16 @@ NO* insereAVL (NO* p, TIPOCHAVE chave, bool* ajustar) {
   return p;
 }
 
+// Retorna o maior elemento da subárvore esquerda de um dado nó, útil à função de exclusão em árvores AVL:
+NO* maiorL (NO* no) {
+  no = no->esq;
+
+  while (no->dir)
+    no = no->dir;
+
+  return no;
+}
+
 void removeAVL() {
   
 }
