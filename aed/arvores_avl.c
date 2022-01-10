@@ -61,6 +61,27 @@ void posOrdem (NO* no) {
   }
 }
 
+// Retorna o nó que contém uma dada chave ao realizar uma busca binária não-recursiva (também armazena o nó pai).
+NO* buscaNo(NO* raiz, TIPOCHAVE chave, NO* *pai) {
+  NO* atual = raiz;
+  *pai = NULL;
+
+  while (atual) {
+    if(atual->chave == chave)
+      return(atual);
+
+    *pai = atual;
+
+    if(chave < atual->chave)
+      atual = atual->esq;
+
+    else
+      atual = atual->dir;
+  }
+
+  return NULL;
+}
+
 // Retorna a altura de uma árvore ou subárvore:
 int h (NO* raiz) {
   if (raiz == NULL)
