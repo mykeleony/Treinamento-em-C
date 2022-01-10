@@ -133,25 +133,22 @@ void imprimeAVL (NO* raiz) {
     printf(")");
 }
 
-// Verifica se uma árvore é AVL:
-bool ehAVL (NO* raiz) {
-  if (raiz) {
-    if(raiz->bal < -1 || raiz->bal > 1)
-      return false;
+// Verifica se uma árvore é AVL, retornando 'T' no caso positivo e 'F' no caso contrário:
+char ehAVL (NO* raiz) {
+  int bal = BALANCEAMENTO_INVALIDO;   // O balanceamento do nó atual é previamente definido como um número inválido.
 
-    if(raiz->esq)
-      if(raiz->esq->chave > raiz->chave)
-        return false;
+  if (raiz)
+    bal = balanceamento(raiz);
 
-    if(raiz->dir)
-      if(raiz->dir->chave < raiz->chave)
-        return false;
+  if (bal < -1 || bal > 1)
+    return 'F';
 
-    ehAVL(raiz->esq);
-    ehAVL(raiz->dir);
-  }
+  // Realiza um percurso em pré-ordem, de modo a verificar o fator de balanceamento de todos os nós da árvore:
+  ehAVL(raiz->esq);
+  ehAVL(raiz->dir);
 
-  return true;
+  if (bal > -2 && bal < 2)
+    return 'T';
 }
 
 // Funções auxiliares à inserção:
